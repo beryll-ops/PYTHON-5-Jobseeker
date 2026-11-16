@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #09090b;
+    --foreground: #f4f4f5;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    min-height: 100vh;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* ========================================================================= */
+/* MOTYW 1: ZINC TECHNICAL (SHADCN STANDARD) - ORYGINALNY                    */
+/* ========================================================================= */
+body.theme-zinc {
+  background-color: #09090b;
+  color: #f4f4f5;
+}
+
+/* ========================================================================= */
+/* MOTYW 2: KOSMICZNY MODERNIZM (FACETED VOID, OSTRE KRAWĘDZIE, BRAK KĄTÓW 90°) */
+/* ========================================================================= */
+body.theme-cosmic {
+  background: radial-gradient(circle at 50% -10%, #151c38 0%, #060914 60%, #020307 100%);
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+/* Fazowane karty z obciętym narożnikiem */
+.theme-cosmic .cosmic-card {
+  background: rgba(10, 14, 28, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  position: relative;
+}
+
+.theme-cosmic .cosmic-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  border-left: 1px solid rgba(99, 102, 241, 0.5);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.5);
+  pointer-events: none;
+}
+
+/* Fazowane przyciski (Skośny trapez 45 st.) */
+.theme-cosmic .cosmic-btn {
+  background: linear-gradient(135deg, #4338ca 0%, #2563eb 100%);
+  color: #ffffff;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  border: 1px solid rgba(165, 180, 252, 0.4);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-cosmic .cosmic-btn:hover {
+  box-shadow: 0 0 18px rgba(79, 70, 229, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Fazowane modalne okna */
+.theme-cosmic .cosmic-modal {
+  background: rgba(8, 12, 24, 0.94);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+}
+
+/* Cienkie linie akcentujące sektory */
+.hairline-cyan { border-left: 2px solid #38bdf8 !important; }
+.hairline-amber { border-left: 2px solid #f59e0b !important; }
+.hairline-orange { border-left: 2px solid #f97316 !important; }
+.hairline-purple { border-left: 2px solid #c084fc !important; }
