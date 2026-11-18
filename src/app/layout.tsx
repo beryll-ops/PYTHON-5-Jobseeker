@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { cookies } from "next/headers";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,6 +36,7 @@ export default async function RootLayout({
     <html lang="pl" className="dark">
       <body className={`${currentTheme} antialiased min-h-screen text-slate-100`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
