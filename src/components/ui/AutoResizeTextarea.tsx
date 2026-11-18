@@ -80,7 +80,7 @@ export const AutoResizeTextarea = forwardRef<
       onInput={handleInput}
       className={cn(
         "w-full bg-zinc-900/90 border border-zinc-700/80 rounded-lg px-3.5 py-2.5 text-sm text-white",
-        "placeholder:text-zinc-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/40",
+        "placeholder:text-zinc-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/40",
         "transition-colors shadow-inner resize-none font-sans",
         className
       )}

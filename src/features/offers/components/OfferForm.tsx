@@ -18,15 +18,6 @@ export interface OfferFormProps {
   onCancel?: () => void;
 }
 
-const COMMON_CATEGORIES = [
-  "IT / Software",
-  "Stolarstwo / Meble",
-  "Car Detailing / Auto",
-  "Marketing / Copywriting",
-  "Handel / Sprzedaż",
-  "Inne",
-];
-
 /**
  * Formularz ręcznego wprowadzania ofert pracy.
  * Zgodnie ze specyfikacją z 02-manual-input-and-form-ux.md:
@@ -44,7 +35,7 @@ export function OfferForm({
   const [isPending, startTransition] = useTransition();
 
   const availableCategories =
-    categories && categories.length > 0 ? categories : COMMON_CATEGORIES;
+    categories && categories.length > 0 ? categories : [];
 
   const {
     register,
@@ -56,7 +47,7 @@ export function OfferForm({
     defaultValues: {
       title: initialData?.title || "",
       company_name: initialData?.company_name || "",
-      category: initialData?.category || availableCategories[0],
+      category: initialData?.category || (availableCategories[0] || ""),
       company_address: initialData?.company_address || "",
       contact_phone: initialData?.contact_phone || "",
       contact_email: initialData?.contact_email || "",
@@ -113,10 +104,10 @@ export function OfferForm({
   };
 
   const inputClass =
-    "w-full bg-zinc-900/90 border border-zinc-700/80 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder:text-zinc-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/40 transition-colors shadow-inner";
+    "w-full bg-zinc-900/90 border border-zinc-700/80 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder:text-zinc-400 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/40 transition-colors shadow-inner";
 
   const selectClass =
-    "w-full bg-zinc-900/90 border border-zinc-700/80 rounded-lg px-3.5 py-2.5 text-sm text-zinc-200 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/40 transition-colors cursor-pointer shadow-inner";
+    "w-full bg-zinc-900/90 border border-zinc-700/80 rounded-lg px-3.5 py-2.5 text-sm text-zinc-200 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/40 transition-colors cursor-pointer shadow-inner";
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3.5 text-xs font-sans">
@@ -149,16 +140,29 @@ export function OfferForm({
 
         {/* Kategoria */}
         <div>
-          <select
-            {...register("category")}
-            className={selectClass}
-          >
-            {availableCategories.map((cat) => (
-              <option key={cat} value={cat}>
-                Branża: {cat}
-              </option>
-            ))}
-          </select>
+          {availableCategories.length > 0 ? (
+            <select
+              {...register("category")}
+              className={selectClass}
+            >
+              <option value="">-- Wybierz branżę --</option>
+              {availableCategories.map((cat) => (
+                <option key={cat} value={cat}>
+                  Branża: {cat}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              {...register("category")}
+              onKeyDown={handleKeyDown}
+              placeholder="Branża / Kategoria (np. IT, Produkcja) *"
+              className={inputClass}
+            />
+          )}
+          {errors.category && (
+            <p className="text-rose-400 text-xs mt-1">{errors.category.message}</p>
+          )}
         </div>
 
         {/* Adres / Miasto */}
@@ -299,10 +303,10 @@ export function OfferForm({
             type="submit"
             disabled={isPending}
             className={cn(
-              "px-5 py-2 font-bold text-xs uppercase tracking-wider transition-all",
+              "px-5 py-2 font-black text-xs uppercase tracking-wider transition-all",
               isCosmic
-                ? "bg-gradient-to-r from-indigo-600 to-blue-600 text-white hover:shadow-[0_0_15px_rgba(79,70,229,0.5)]"
-                : "bg-blue-600 hover:bg-blue-500 text-white rounded"
+                ? "bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500 text-zinc-950 hover:shadow-[0_0_20px_rgba(250,204,21,0.5)]"
+                : "bg-yellow-400 hover:bg-yellow-300 text-zinc-950 rounded shadow-[0_0_15px_rgba(250,204,21,0.25)]"
             )}
             style={
               isCosmic

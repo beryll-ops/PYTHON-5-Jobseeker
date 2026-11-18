@@ -113,16 +113,16 @@ export function CategoryManager({
           value={newCatName}
           onChange={(e) => setNewCatName(e.target.value)}
           placeholder="Nowa kategoria (np. Logistyka, Gastronomia...)"
-          className="flex-1 bg-zinc-950 border border-zinc-700 text-white px-3 py-2 rounded focus:border-cyan-400 outline-none text-xs"
+          className="flex-1 bg-zinc-950 border border-zinc-700 text-white px-3 py-2 rounded focus:border-yellow-400 outline-none text-xs transition-colors"
         />
         <button
           type="submit"
           disabled={isPending || !newCatName.trim()}
           className={cn(
-            "px-4 py-2 font-bold text-xs uppercase tracking-wider transition-all disabled:opacity-50",
+            "px-4 py-2 font-black text-xs uppercase tracking-wider transition-all disabled:opacity-50",
             isCosmic
               ? "cosmic-btn"
-              : "bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-sm"
+              : "bg-yellow-400 hover:bg-yellow-300 text-zinc-950 rounded-lg shadow-[0_0_15px_rgba(250,204,21,0.25)]"
           )}
         >
           {isPending ? "Zapis..." : "+ Dodaj"}
@@ -130,65 +130,71 @@ export function CategoryManager({
       </form>
 
       {/* Lista kategorii */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 pt-1">
-        {categories.map((cat) => (
-          <div
-            key={cat.id}
-            className="p-3 bg-black/40 border border-white/5 rounded-lg flex items-center justify-between gap-2 text-xs"
-          >
-            {editingId === cat.id ? (
-              <div className="flex items-center gap-1.5 flex-1">
-                <input
-                  type="text"
-                  value={editingName}
-                  onChange={(e) => setEditingName(e.target.value)}
-                  className="w-full bg-zinc-950 border border-cyan-400 text-white px-2 py-1 rounded text-xs outline-none"
-                  autoFocus
-                />
-                <button
-                  type="button"
-                  onClick={() => handleSaveEdit(cat.id)}
-                  className="px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded text-[11px] font-bold"
-                >
-                  ✓
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setEditingId(null)}
-                  className="px-2 py-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded text-[11px]"
-                >
-                  ✕
-                </button>
-              </div>
-            ) : (
-              <>
-                <span className="font-mono text-zinc-200 font-semibold truncate">
-                  {isCosmic ? `// ${cat.name}` : cat.name}
-                </span>
-
-                <div className="flex items-center gap-1.5 flex-shrink-0">
+      {categories.length === 0 ? (
+        <div className="text-center py-6 text-zinc-500 font-mono text-xs border border-dashed border-zinc-800 rounded-lg">
+          Brak kategorii. Wpisz nazwę powyżej i kliknij „+ Dodaj”.
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 pt-1">
+          {categories.map((cat) => (
+            <div
+              key={cat.id}
+              className="p-3 bg-black/40 border border-white/5 rounded-lg flex items-center justify-between gap-2 text-xs"
+            >
+              {editingId === cat.id ? (
+                <div className="flex items-center gap-1.5 flex-1">
+                  <input
+                    type="text"
+                    value={editingName}
+                    onChange={(e) => setEditingName(e.target.value)}
+                    className="w-full bg-zinc-950 border border-yellow-400 text-white px-2 py-1 rounded text-xs outline-none"
+                    autoFocus
+                  />
                   <button
                     type="button"
-                    onClick={() => startEditing(cat)}
-                    className="text-zinc-400 hover:text-cyan-300 font-mono text-[11px] p-1"
-                    title="Edytuj nazwę"
+                    onClick={() => handleSaveEdit(cat.id)}
+                    className="px-2 py-1 bg-yellow-400 hover:bg-yellow-300 text-zinc-950 rounded text-[11px] font-bold"
                   >
-                    ✎
+                    ✓
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleDelete(cat.id, cat.name)}
-                    className="text-zinc-500 hover:text-rose-400 font-mono text-[11px] p-1"
-                    title="Usuń kategorię"
+                    onClick={() => setEditingId(null)}
+                    className="px-2 py-1 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded text-[11px]"
                   >
-                    🗑
+                    ✕
                   </button>
                 </div>
-              </>
-            )}
-          </div>
-        ))}
-      </div>
+              ) : (
+                <>
+                  <span className="font-mono text-zinc-200 font-semibold truncate">
+                    {isCosmic ? `// ${cat.name}` : cat.name}
+                  </span>
+
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => startEditing(cat)}
+                      className="text-zinc-400 hover:text-yellow-400 font-mono text-[11px] p-1 transition-colors"
+                      title="Edytuj nazwę"
+                    >
+                      ✎
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(cat.id, cat.name)}
+                      className="text-zinc-500 hover:text-rose-400 font-mono text-[11px] p-1"
+                      title="Usuń kategorię"
+                    >
+                      🗑
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

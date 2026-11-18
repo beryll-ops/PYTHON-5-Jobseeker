@@ -49,13 +49,13 @@ export function ThemeSelector({ initialTheme = "zinc", className }: ThemeSelecto
           className={cn(
             "p-4 rounded-xl border text-left transition-all relative",
             theme === "zinc"
-              ? "bg-zinc-900 border-blue-500 shadow-md ring-1 ring-blue-500"
+              ? "bg-zinc-900 border-yellow-500/70 shadow-[0_0_15px_rgba(234,179,8,0.15)] ring-1 ring-yellow-400"
               : "bg-zinc-950/60 border-zinc-800 hover:border-zinc-700"
           )}
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-semibold text-white">1. Zinc Technical (Shadcn)</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-mono">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-yellow-400/10 text-yellow-400 border border-yellow-400/30 font-mono">
               Oryginał
             </span>
           </div>
@@ -63,7 +63,7 @@ export function ThemeSelector({ initialTheme = "zinc", className }: ThemeSelecto
             Klasyczny, stonowany styl dark mode. Zaokrąglone krawędzie, pełne pigułki statusów, standardowe kąty 90°.
           </p>
           {theme === "zinc" && (
-            <span className="mt-3 inline-block text-[11px] font-bold text-blue-400">
+            <span className="mt-3 inline-block text-[11px] font-bold text-yellow-400">
               ✓ Aktywny motyw
             </span>
           )}
@@ -76,24 +76,24 @@ export function ThemeSelector({ initialTheme = "zinc", className }: ThemeSelecto
           className={cn(
             "p-4 border text-left transition-all relative",
             theme === "cosmic"
-              ? "bg-[#0a0e1c] border-indigo-500 shadow-[0_0_20px_rgba(79,70,229,0.25)] ring-1 ring-indigo-500"
-              : "bg-[#04060d]/60 border-zinc-800 hover:border-indigo-500/40"
+              ? "bg-[#09090c] border-yellow-400 shadow-[0_0_24px_rgba(250,204,21,0.25)] ring-1 ring-yellow-400"
+              : "bg-[#040406]/60 border-zinc-800 hover:border-yellow-500/40"
           )}
           style={{
             clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%)",
           }}
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-indigo-300 font-mono">✦ 2. Kosmiczny Modernizm</span>
-            <span className="text-[10px] px-2 py-0.5 font-mono uppercase bg-indigo-500/10 text-indigo-300 border border-indigo-500/30">
+            <span className="text-xs font-black text-yellow-300 font-mono">✦ 2. Kosmiczny Modernizm (Cyber Void)</span>
+            <span className="text-[10px] px-2 py-0.5 font-mono uppercase bg-yellow-400/15 text-yellow-300 border border-yellow-400/40 font-bold">
               Faceted Void
             </span>
           </div>
           <p className="text-xs text-zinc-400 leading-relaxed font-mono">
-            Ścięte narożniki pod kątem 45°, trapezowe przyciski bez kątów prostych, czysta typografia i licznik telemetrii HUD CV.
+            Ścięte narożniki pod kątem 45°, trapezowe przyciski bez kątów prostych, głęboka czerń z elektrycznym złotem.
           </p>
           {theme === "cosmic" && (
-            <span className="mt-3 inline-block text-[11px] font-bold text-cyan-300 font-mono">
+            <span className="mt-3 inline-block text-[11px] font-bold text-yellow-400 font-mono">
               ✓ Aktywny motyw terminala
             </span>
           )}

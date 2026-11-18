@@ -90,7 +90,7 @@ export function CvUploadModal({
         className={cn(
           "w-full max-w-md p-6 space-y-4 shadow-2xl relative text-xs",
           isCosmic
-            ? "bg-[#080d1e] border border-indigo-500/40 text-slate-200"
+            ? "bg-[#09090d] border border-yellow-500/35 text-slate-200 shadow-[0_0_35px_rgba(234,179,8,0.12)]"
             : "bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-2xl"
         )}
         style={
@@ -131,7 +131,7 @@ export function CvUploadModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="np. CV Python Senior 2026"
-              className="w-full bg-zinc-950 border border-zinc-700 text-white p-2.5 rounded focus:border-cyan-400 outline-none text-xs"
+              className="w-full bg-zinc-950 border border-zinc-700 text-white p-2.5 rounded focus:border-yellow-400 outline-none text-xs transition-colors"
             />
           </div>
 
@@ -151,7 +151,7 @@ export function CvUploadModal({
               id="is_default_cv"
               checked={isDefault}
               onChange={(e) => setIsDefault(e.target.checked)}
-              className="w-3.5 h-3.5 rounded border-zinc-700 text-cyan-500 cursor-pointer"
+              className="w-3.5 h-3.5 rounded border-zinc-700 text-yellow-400 accent-yellow-400 cursor-pointer"
             />
             <label htmlFor="is_default_cv" className="text-zinc-300 cursor-pointer select-none">
               Ustaw ten wariant jako domyślny
@@ -170,10 +170,10 @@ export function CvUploadModal({
               type="submit"
               disabled={isPending}
               className={cn(
-                "px-5 py-2 font-bold text-xs uppercase tracking-wider transition-all",
+                "px-5 py-2 font-black text-xs uppercase tracking-wider transition-all",
                 isCosmic
-                  ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow"
-                  : "bg-blue-600 hover:bg-blue-500 text-white rounded"
+                  ? "cosmic-btn"
+                  : "bg-yellow-400 hover:bg-yellow-300 text-zinc-950 rounded shadow-[0_0_15px_rgba(250,204,21,0.25)]"
               )}
             >
               {isPending ? "Wgrywanie..." : "Zapisz Wariant"}

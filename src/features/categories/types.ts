@@ -5,15 +5,6 @@ export interface JobCategory {
   created_at: string;
 }
 
-export const DEFAULT_CATEGORIES = [
-  "IT / Software",
-  "Stolarstwo / Meble",
-  "Car Detailing / Auto",
-  "Marketing / Copywriting",
-  "Handel / Sprzedaż",
-  "Inne",
-];
-
 export interface CreateCategoryInput {
   name: string;
 }

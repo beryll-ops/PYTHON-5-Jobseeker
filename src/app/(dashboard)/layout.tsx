@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
+import { UserNav } from "@/features/auth/components/UserNav";
 
 export default async function DashboardLayout({
   children,
@@ -11,24 +13,29 @@ export default async function DashboardLayout({
   const theme = cookieStore.get("jobseeker-theme")?.value || "zinc";
   const isCosmic = theme === "cosmic";
 
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#070709] text-zinc-100">
       {/* Pasek nawigacyjny */}
       <header
         className={
           isCosmic
-            ? "border-b border-indigo-500/20 bg-[#060914]/80 backdrop-blur-md sticky top-0 z-40"
-            : "border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md sticky top-0 z-40"
+            ? "border-b border-yellow-500/20 bg-[#07070a]/90 backdrop-blur-md sticky top-0 z-40"
+            : "border-b border-zinc-800/90 bg-zinc-950/90 backdrop-blur-md sticky top-0 z-40"
         }
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center gap-2 group">
+            <Link href="/" className="flex items-center gap-2.5 group">
               <div
                 className={
                   isCosmic
-                    ? "w-7 h-7 bg-indigo-600 flex items-center justify-center font-bold text-white text-xs font-mono"
-                    : "w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white text-xs"
+                    ? "w-7 h-7 bg-gradient-to-br from-yellow-400 via-amber-400 to-yellow-500 text-zinc-950 flex items-center justify-center font-black text-xs font-mono shadow-[0_0_14px_rgba(234,179,8,0.35)]"
+                    : "w-7 h-7 rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 text-zinc-950 flex items-center justify-center font-black text-xs shadow-[0_0_12px_rgba(234,179,8,0.3)]"
                 }
                 style={
                   isCosmic
@@ -38,37 +45,43 @@ export default async function DashboardLayout({
               >
                 P5
               </div>
-              <span className="font-bold text-sm text-white group-hover:text-cyan-300 transition-colors">
-                Python5 JobSeeker
+              <span className="font-bold text-sm text-white group-hover:text-yellow-400 transition-colors tracking-tight">
+                Python5 <span className="text-yellow-400">JobSeeker</span>
               </span>
             </Link>
           </div>
 
-          {/* Nawigacja */}
-          <nav className="flex items-center gap-3 sm:gap-4 text-xs font-mono">
-            <Link
-              href="/"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Oferty
-            </Link>
-            <Link
-              href="/cv"
-              className="text-zinc-300 hover:text-white transition-colors"
-            >
-              Twoje CV
-            </Link>
-            <Link
-              href="/settings"
-              className={
-                isCosmic
-                  ? "px-2.5 py-1 text-[11px] font-bold text-cyan-300 bg-indigo-950/60 border border-indigo-500/30 hover:bg-indigo-900/60 transition-colors"
-                  : "px-2.5 py-1 rounded-md text-[11px] bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
-              }
-            >
-              Ustawienia
-            </Link>
-          </nav>
+          {/* Nawigacja i profil */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <nav className="flex items-center gap-3 sm:gap-4 text-xs font-mono">
+              <Link
+                href="/"
+                className="text-zinc-300 hover:text-yellow-400 transition-colors"
+              >
+                Oferty
+              </Link>
+              <Link
+                href="/cv"
+                className="text-zinc-300 hover:text-yellow-400 transition-colors"
+              >
+                Twoje CV
+              </Link>
+              <Link
+                href="/settings"
+                className={
+                  isCosmic
+                    ? "px-2.5 py-1 text-[11px] font-bold text-yellow-300 bg-yellow-950/30 border border-yellow-500/40 hover:bg-yellow-900/40 hover:border-yellow-400 transition-all shadow-[0_0_10px_rgba(234,179,8,0.15)]"
+                    : "px-2.5 py-1 rounded-md text-[11px] bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-yellow-400 hover:border-yellow-500/40 transition-colors"
+                }
+              >
+                Ustawienia
+              </Link>
+            </nav>
+
+            <div className="h-4 w-px bg-yellow-500/20 hidden sm:block" />
+
+            <UserNav email={user?.email} isCosmic={isCosmic} />
+          </div>
         </div>
       </header>
 
@@ -78,7 +91,7 @@ export default async function DashboardLayout({
       </main>
 
       {/* Stopka */}
-      <footer className="border-t border-white/5 py-4 text-center text-zinc-600 text-xs font-mono">
+      <footer className="border-t border-yellow-500/10 py-4 text-center text-zinc-500 text-xs font-mono">
         Jobseeker Hub • Multi-Industry Recruitment Tracker
       </footer>
     </div>

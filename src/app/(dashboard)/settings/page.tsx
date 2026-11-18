@@ -16,7 +16,7 @@ export default async function SettingsPage() {
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Nagłówek */}
       <div>
-        <span className="text-[11px] font-mono text-cyan-400 font-bold uppercase">
+        <span className="text-[11px] font-mono text-yellow-400 font-bold uppercase">
           // KONFIGURACJA_SYSTEMU
         </span>
         <h1 className="text-xl sm:text-2xl font-bold text-white mt-1">

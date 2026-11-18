@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Python5 JobSeeker - Centrum Operacyjne Rekrutacji",
-  description: "Zarządzanie ofertami pracy, wariantami CV i etapami rekrutacji",
+  description: "Zarządzanie ofertami pracy i etapami rekrutacji",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,

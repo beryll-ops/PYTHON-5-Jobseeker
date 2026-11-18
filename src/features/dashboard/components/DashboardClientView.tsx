@@ -118,7 +118,7 @@ export function DashboardClientView({
           <button
             type="button"
             onClick={() => setIsFormOpen(true)}
-            className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition-colors shadow-sm"
+            className="px-4 py-1.5 rounded-lg bg-yellow-400 hover:bg-yellow-300 text-zinc-950 font-black text-xs transition-all shadow-[0_0_15px_rgba(250,204,21,0.25)] hover:shadow-[0_0_22px_rgba(250,204,21,0.4)] tracking-wider uppercase"
           >
             + Dodaj Ofertę
           </button>
@@ -189,7 +189,7 @@ export function DashboardClientView({
               "w-full py-3 text-center font-bold text-xs uppercase tracking-wider shadow-2xl transition-all",
               isCosmic
                 ? "cosmic-btn"
-                : "bg-blue-600 hover:bg-blue-500 text-white rounded-xl"
+                : "bg-yellow-400 hover:bg-yellow-300 text-zinc-950 font-black rounded-xl shadow-[0_0_20px_rgba(250,204,21,0.3)]"
             )}
           >
             + Dodaj Nową Ofertę

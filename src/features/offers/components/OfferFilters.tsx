@@ -40,8 +40,8 @@ export function OfferFilters({
       className={cn(
         "p-3 space-y-3",
         isCosmic
-          ? "bg-[#0a0e1c]/80 border border-indigo-500/20 backdrop-blur-md"
-          : "bg-zinc-900/60 rounded-xl border border-zinc-800"
+          ? "bg-[#09090c]/90 border border-yellow-500/20 backdrop-blur-md"
+          : "bg-zinc-950/80 rounded-xl border border-zinc-800"
       )}
       style={
         isCosmic
@@ -59,12 +59,12 @@ export function OfferFilters({
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Szukaj stanowiska lub firmy..."
-            className="w-full bg-zinc-950 border border-zinc-700 text-white pl-3 pr-3 py-2 rounded focus:border-cyan-400 outline-none text-xs"
+            className="w-full bg-zinc-900/90 border border-zinc-700 text-white pl-3 pr-3 py-2 rounded focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400/30 outline-none text-xs transition-colors"
           />
           {search && (
             <button
               onClick={() => onSearchChange("")}
-              className="absolute right-2.5 top-2 text-zinc-500 hover:text-white"
+              className="absolute right-2.5 top-2 text-zinc-500 hover:text-yellow-400"
             >
               ✕
             </button>
@@ -76,7 +76,7 @@ export function OfferFilters({
           <select
             value={category}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="w-full bg-zinc-950 border border-zinc-700 text-white py-2 px-2.5 rounded focus:border-cyan-400 outline-none text-xs font-mono"
+            className="w-full bg-zinc-900/90 border border-zinc-700 text-white py-2 px-2.5 rounded focus:border-yellow-400 outline-none text-xs font-mono transition-colors"
           >
             <option value="all">// WSZYSTKIE SEKTORY</option>
             {categories.map((cat) => (
@@ -92,7 +92,7 @@ export function OfferFilters({
           <select
             value={status}
             onChange={(e) => onStatusChange(e.target.value as RecruitmentStatus | "all")}
-            className="w-full bg-zinc-950 border border-zinc-700 text-white py-2 px-2.5 rounded focus:border-cyan-400 outline-none text-xs font-mono"
+            className="w-full bg-zinc-900/90 border border-zinc-700 text-white py-2 px-2.5 rounded focus:border-yellow-400 outline-none text-xs font-mono transition-colors"
           >
             <option value="all">Wszystkie etapy</option>
             {Object.entries(STATUS_LABELS).map(([val, label]) => (
@@ -105,12 +105,12 @@ export function OfferFilters({
 
         {/* Przełącznik "Tylko do wysłania" */}
         <div className="sm:col-span-2 flex items-center justify-start sm:justify-center">
-          <label className="inline-flex items-center gap-2 cursor-pointer select-none text-[11px] font-mono text-zinc-300">
+          <label className="inline-flex items-center gap-2 cursor-pointer select-none text-[11px] font-mono text-zinc-300 hover:text-yellow-400 transition-colors">
             <input
               type="checkbox"
               checked={onlyUnsent}
               onChange={(e) => onOnlyUnsentChange(e.target.checked)}
-              className="w-3.5 h-3.5 rounded border-zinc-700 text-cyan-500 focus:ring-0 cursor-pointer"
+              className="w-3.5 h-3.5 rounded border-zinc-700 text-yellow-400 accent-yellow-400 focus:ring-0 cursor-pointer"
             />
             <span>Do wysłania</span>
           </label>

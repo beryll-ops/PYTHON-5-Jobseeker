@@ -39,7 +39,7 @@ export function OfferCard({
       <div
         onClick={() => onSelect?.(offer)}
         className={cn(
-          "p-4 cursor-pointer active:scale-[0.99] transition-all space-y-2.5 bg-[#0a0e1c]/80 backdrop-blur-md border border-indigo-500/20 relative",
+          "p-4 cursor-pointer active:scale-[0.99] transition-all space-y-2.5 bg-[#09090c]/85 backdrop-blur-md border border-yellow-500/20 hover:border-yellow-400/50 shadow-[0_0_15px_rgba(0,0,0,0.7)] relative",
           getHairlineClass()
         )}
         style={{
@@ -80,7 +80,7 @@ export function OfferCard({
   return (
     <div
       onClick={() => onSelect?.(offer)}
-      className="bg-zinc-900 p-3.5 rounded-2xl border border-zinc-800 shadow-md cursor-pointer active:scale-[0.99] transition-all space-y-2"
+      className="bg-zinc-900/90 p-3.5 rounded-2xl border border-zinc-800 hover:border-yellow-500/40 shadow-md cursor-pointer active:scale-[0.99] transition-all space-y-2 group"
     >
       <div className="flex items-center justify-between gap-2">
         <CategoryPill category={offer.category} />
@@ -88,7 +88,7 @@ export function OfferCard({
       </div>
 
       <div>
-        <h3 className="text-sm font-bold text-white">{offer.title}</h3>
+        <h3 className="text-sm font-bold text-white group-hover:text-yellow-400 transition-colors">{offer.title}</h3>
         <p className="text-xs text-zinc-400 mt-0.5">
           {offer.company_name}
           {offer.company_address ? ` • ${offer.company_address}` : ""}

@@ -142,3 +142,18 @@ DROP POLICY IF EXISTS "Users can delete their own resumes" ON storage.objects;
 CREATE POLICY "Users can delete their own resumes"
     ON storage.objects FOR DELETE
     USING (bucket_id = 'resumes' AND auth.uid()::text = (storage.foldername(name))[1]);
+
+-- 10. Uprawnienia tabel (GRANT) dla ról Supabase (anon, authenticated, service_role)
+-- PostgreSQL wymaga jawnego GRANT przed ewaluacją polityk RLS
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+
+GRANT ALL ON TABLE public.cv_variants TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.job_categories TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.job_offers TO anon, authenticated, service_role;
+GRANT ALL ON TABLE public.offer_status_history TO anon, authenticated, service_role;
+
+GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated, service_role;
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon, authenticated, service_role;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO anon, authenticated, service_role;
+

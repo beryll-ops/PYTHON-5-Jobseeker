@@ -36,7 +36,35 @@ export async function middleware(request: NextRequest) {
   });
 
   // Odświeżenie sesji użytkownika
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const pathname = request.nextUrl.pathname;
+  const isAuthRoute =
+    pathname.startsWith("/login") || pathname.startsWith("/auth");
+
+  // Niezalogowany użytkownik wchodzący na chronioną trasę zostaje przekierowany do /login
+  if (!user && !isAuthRoute) {
+    const redirectUrl = new URL("/login", request.url);
+    if (pathname !== "/") {
+      redirectUrl.searchParams.set("redirectTo", pathname);
+    }
+    const redirectResponse = NextResponse.redirect(redirectUrl);
+    response.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+    });
+    return redirectResponse;
+  }
+
+  // Zalogowany użytkownik wchodzący na /login zostaje przekierowany do panelu głównego
+  if (user && pathname === "/login") {
+    const redirectResponse = NextResponse.redirect(new URL("/", request.url));
+    response.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+    });
+    return redirectResponse;
+  }
 
   return response;
 }

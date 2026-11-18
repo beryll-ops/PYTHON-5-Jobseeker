@@ -36,7 +36,7 @@ export function OfferTable({
   if (isCosmic) {
     return (
       <div
-        className="border border-indigo-500/25 bg-[#0a0e1c]/70 backdrop-blur-md overflow-hidden shadow-2xl"
+        className="border border-yellow-500/25 bg-[#09090c]/80 backdrop-blur-md overflow-hidden shadow-2xl"
         style={{
           clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
         }}
@@ -44,7 +44,7 @@ export function OfferTable({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-indigo-500/20 text-zinc-400 font-mono text-[11px] uppercase tracking-wider bg-white/[0.02]">
+              <tr className="border-b border-yellow-500/20 text-zinc-400 font-mono text-[11px] uppercase tracking-wider bg-white/[0.02]">
                 <th className="py-3 px-4">Stanowisko // Pracodawca</th>
                 <th className="py-3 px-3">Sektor</th>
                 <th className="py-3 px-3">Wariant CV</th>
@@ -59,10 +59,10 @@ export function OfferTable({
                 <tr
                   key={offer.id}
                   onClick={() => onSelect?.(offer)}
-                  className="hover:bg-white/[0.03] transition-colors cursor-pointer group"
+                  className="hover:bg-yellow-500/[0.04] transition-colors cursor-pointer group"
                 >
                   <td className="py-3.5 px-4">
-                    <div className="font-bold text-sm text-white group-hover:text-cyan-300 transition-colors tracking-tight">
+                    <div className="font-bold text-sm text-white group-hover:text-yellow-400 transition-colors tracking-tight">
                       {offer.title}
                     </div>
                     <div className="text-xs text-zinc-400 font-mono mt-0.5">
@@ -96,7 +96,7 @@ export function OfferTable({
                     {offer.contact_phone ? (
                       <a
                         href={`tel:${offer.contact_phone.replace(/\s/g, "")}`}
-                        className="text-cyan-400 hover:underline block font-semibold"
+                        className="text-yellow-400 hover:underline block font-semibold"
                       >
                         {offer.contact_phone}
                       </a>
@@ -118,7 +118,7 @@ export function OfferTable({
                     <button
                       type="button"
                       onClick={() => onSelect?.(offer)}
-                      className="px-3 py-1 text-xs font-mono text-zinc-300 hover:text-white uppercase tracking-wider bg-zinc-900 border border-zinc-700 hover:border-cyan-400 transition-colors"
+                      className="px-3 py-1 text-xs font-mono text-zinc-300 hover:text-yellow-300 uppercase tracking-wider bg-zinc-900 border border-zinc-700 hover:border-yellow-400 transition-colors shadow-sm"
                       style={{
                         clipPath: "polygon(4px 0, 100% 0, calc(100% - 4px) 100%, 0 100%)",
                       }}
@@ -156,10 +156,10 @@ export function OfferTable({
               <tr
                 key={offer.id}
                 onClick={() => onSelect?.(offer)}
-                className="hover:bg-zinc-800/40 transition-colors cursor-pointer"
+                className="hover:bg-zinc-800/40 transition-colors cursor-pointer group"
               >
                 <td className="py-3.5 px-4">
-                  <div className="font-semibold text-white">{offer.title}</div>
+                  <div className="font-semibold text-white group-hover:text-yellow-400 transition-colors">{offer.title}</div>
                   <div className="text-xs text-zinc-400 mt-0.5">
                     {offer.company_name}
                     {offer.company_address ? ` • ${offer.company_address}` : ""}
@@ -190,7 +190,7 @@ export function OfferTable({
                   {offer.contact_phone ? (
                     <a
                       href={`tel:${offer.contact_phone.replace(/\s/g, "")}`}
-                      className="text-blue-400 hover:underline block"
+                      className="text-yellow-400 hover:underline block font-semibold"
                     >
                       {offer.contact_phone}
                     </a>
@@ -212,7 +212,7 @@ export function OfferTable({
                   <button
                     type="button"
                     onClick={() => onSelect?.(offer)}
-                    className="px-2.5 py-1 rounded-md text-xs bg-zinc-950 border border-zinc-800 text-zinc-300 hover:text-white transition-colors"
+                    className="px-2.5 py-1 rounded-md text-xs bg-zinc-950 border border-zinc-800 text-zinc-300 hover:text-yellow-400 hover:border-yellow-500/40 transition-colors"
                   >
                     Karta ↗
                   </button>

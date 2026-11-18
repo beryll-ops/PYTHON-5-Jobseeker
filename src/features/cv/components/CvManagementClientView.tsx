@@ -49,7 +49,7 @@ export function CvManagementClientView({
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <span className="text-[11px] font-mono text-cyan-400 font-bold uppercase">
+            <span className="text-[11px] font-mono text-yellow-400 font-bold uppercase">
               // ZARZĄDZANIE_DOKUMENTACJĄ
             </span>
             <h1 className="text-xl sm:text-2xl font-bold text-white mt-1">
@@ -64,64 +64,70 @@ export function CvManagementClientView({
             type="button"
             onClick={() => setIsModalOpen(true)}
             className={cn(
-              "px-4 py-2 font-bold text-xs uppercase tracking-wider transition-all",
+              "px-4 py-2 font-black text-xs uppercase tracking-wider transition-all",
               isCosmic
                 ? "cosmic-btn"
-                : "bg-blue-600 hover:bg-blue-500 text-white rounded-lg shadow-sm"
+                : "bg-yellow-400 hover:bg-yellow-300 text-zinc-950 font-black rounded-lg shadow-[0_0_15px_rgba(250,204,21,0.25)]"
             )}
           >
             + Nowy Wariant CV
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {variants.map((v) => (
-            <div
-              key={v.id}
-              className={cn(
-                "p-4 flex flex-col justify-between space-y-3",
-                isCosmic
-                  ? "cosmic-card"
-                  : "bg-zinc-900 border border-zinc-800 rounded-xl"
-              )}
-            >
-              <div>
-                <div className="flex items-center justify-between text-xs mb-2">
-                  <span className="font-mono text-zinc-500 text-[10px]">
-                    {v.file_path ? "📄 Plik PDF" : "📝 Bez pliku"}
-                  </span>
-                  {v.is_default && (
-                    <span className="px-2 py-0.5 text-[10px] font-mono uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-full">
-                      Domyślne
+        {variants.length === 0 ? (
+          <div className="text-center py-12 border border-dashed border-zinc-800 rounded-xl text-zinc-500 font-mono text-xs">
+            Brak wariantów CV. Kliknij „+ Nowy Wariant CV”, aby dodać swój pierwszy dokument.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {variants.map((v) => (
+              <div
+                key={v.id}
+                className={cn(
+                  "p-4 flex flex-col justify-between space-y-3",
+                  isCosmic
+                    ? "cosmic-card"
+                    : "bg-zinc-900 border border-zinc-800 rounded-xl"
+                )}
+              >
+                <div>
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className="font-mono text-zinc-500 text-[10px]">
+                      {v.file_path ? "📄 Plik PDF" : "📝 Bez pliku"}
                     </span>
-                  )}
+                    {v.is_default && (
+                      <span className="px-2 py-0.5 text-[10px] font-mono uppercase bg-yellow-400/15 text-yellow-300 border border-yellow-400/40 rounded-full">
+                        Domyślne
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-base font-bold text-white">{v.name}</h3>
+                  <p className="text-xs text-zinc-400 font-mono mt-1 truncate">
+                    {v.file_path || "Brak podpiętego pliku PDF"}
+                  </p>
                 </div>
-                <h3 className="text-base font-bold text-white">{v.name}</h3>
-                <p className="text-xs text-zinc-400 font-mono mt-1 truncate">
-                  {v.file_path || "Brak podpiętego pliku PDF"}
-                </p>
-              </div>
 
-              <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
-                <button
-                  type="button"
-                  onClick={() => handleDownload(v.file_path)}
-                  className="text-cyan-400 hover:underline font-mono text-[11px]"
-                >
-                  Pobierz PDF ↗
-                </button>
+                <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                  <button
+                    type="button"
+                    onClick={() => handleDownload(v.file_path)}
+                    className="text-yellow-400 hover:underline font-mono text-[11px]"
+                  >
+                    Pobierz PDF ↗
+                  </button>
 
-                <button
-                  type="button"
-                  onClick={() => handleDelete(v.id, v.name)}
-                  className="text-rose-400 hover:text-rose-300 font-mono text-[11px]"
-                >
-                  Usuń
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(v.id, v.name)}
+                    className="text-rose-400 hover:text-rose-300 font-mono text-[11px]"
+                  >
+                    Usuń
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* SEKCJA 2: Kategorie Pracy */}

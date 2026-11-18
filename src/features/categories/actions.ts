@@ -2,24 +2,18 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { type JobCategory, DEFAULT_CATEGORIES } from "./types";
+import type { JobCategory } from "./types";
 
 /**
  * Pobiera listę kategorii pracy dla zalogowanego użytkownika.
- * Przy pierwszym logowaniu użytkownika automatycznie inicjalizuje zestaw domyślnych kategorii.
+ * Zwraca wyłącznie kategorie zdefiniowane w bazie przez użytkownika.
  */
 export async function getCategories(): Promise<JobCategory[]> {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    // Tryb gościa / demo: zwraca domyślne kategorie
-    return DEFAULT_CATEGORIES.map((name, index) => ({
-      id: `default-${index}`,
-      user_id: "demo-user",
-      name,
-      created_at: new Date().toISOString(),
-    }));
+    return [];
   }
 
   const { data, error } = await supabase
@@ -31,24 +25,6 @@ export async function getCategories(): Promise<JobCategory[]> {
   if (error) {
     console.error("Błąd pobierania kategorii pracy:", error.message);
     return [];
-  }
-
-  // Jeśli użytkownik nie ma jeszcze zdefiniowanych kategorii, automatycznie inicjalizujemy bazowe
-  if (!data || data.length === 0) {
-    const seedPayload = DEFAULT_CATEGORIES.map((name) => ({
-      user_id: user.id,
-      name,
-    }));
-
-    const { data: seeded, error: seedError } = await supabase
-      .from("job_categories")
-      .insert(seedPayload)
-      .select("*")
-      .order("name", { ascending: true });
-
-    if (!seedError && seeded) {
-      return seeded;
-    }
   }
 
   return data || [];

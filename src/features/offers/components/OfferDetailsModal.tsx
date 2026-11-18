@@ -182,7 +182,7 @@ export function OfferDetailsModal({
                 href={offer.source_url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-cyan-400 hover:underline font-mono text-[11px] block truncate"
+                className="text-yellow-400 hover:underline font-mono text-[11px] block truncate"
               >
                 🔗 Ogłoszenie źródłowe ({offer.source_url}) ↗
               </a>
@@ -269,7 +269,7 @@ export function OfferDetailsModal({
                 <button
                   type="button"
                   onClick={() => setIsEditing(true)}
-                  className="text-cyan-400 hover:text-cyan-300 font-mono text-xs underline font-semibold"
+                  className="text-yellow-400 hover:text-yellow-300 font-mono text-xs underline font-semibold"
                 >
                   Edytuj ofertę
                 </button>
